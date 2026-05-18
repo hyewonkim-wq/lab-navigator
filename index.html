@@ -413,6 +413,10 @@
     align-self: stretch;
   }
 
+  :root[data-theme="light"] .tab.active {
+    color: #ffffff;
+  }
+
   @media (max-width: 600px) {
     header { padding: 0 16px; }
     main { padding: 32px 16px 60px; }
@@ -435,8 +439,8 @@
       <input type="text" id="searchInput" placeholder="시트 검색..." oninput="filterCards(this.value)"/>
     </div>
     <div class="theme-toggle">
-      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">DARK</button>
       <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">LIGHT</button>
+      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">DARK</button>
     </div>
   </div>
 </header>
@@ -450,32 +454,33 @@
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-num" id="totalCount">8</div>
-      <div class="stat-label">전체 시트</div>
+      <div class="stat-num" id="totalCount">11</div>
+      <div class="stat-label">전체</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">4</div>
+      <div class="stat-num">5</div>
       <div class="stat-label">카테고리</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">6</div>
+      <div class="stat-num">7</div>
       <div class="stat-label">스프레드시트</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">2</div>
+      <div class="stat-num">4</div>
       <div class="stat-label">드라이브 폴더</div>
     </div>
   </div>
 
   <div class="tabs" id="tabs">
-    <button class="tab active" onclick="filterTab('all', this)">전체 <span class="tab-count">8</span></button>
-    <button class="tab" onclick="filterTab('plan', this)">계획/관리 <span class="tab-count">2</span></button>
-    <button class="tab" onclick="filterTab('experiment', this)">실험 트래킹 <span class="tab-count">2</span></button>
-    <button class="tab" onclick="filterTab('reagent', this)">시약/소모품/슬라이드 <span class="tab-count">2</span></button>
+    <button class="tab active" onclick="filterTab('all', this)">전체 <span class="tab-count">11</span></button>
+    <button class="tab" onclick="filterTab('plan', this)">계획/관리 <span class="tab-count">1</span></button>
+    <button class="tab" onclick="filterTab('experiment', this)">실험 트래킹 <span class="tab-count">3</span></button>
+    <button class="tab" onclick="filterTab('reagent', this)">시약/소모품 <span class="tab-count">3</span></button>
     <button class="tab" onclick="filterTab('docs', this)">연구 문서 <span class="tab-count">2</span></button>
+    <button class="tab" onclick="filterTab('receipt', this)">결제 관리 <span class="tab-count">2</span></button>
   </div>
 
   <div id="cardContainer"></div>
@@ -489,7 +494,7 @@
       id: 1,
       category: "plan",
       categoryLabel: "계획/관리",
-      title: "연간 연구 계획표",
+      title: "2026년 주간 계획 및 수행 현황 통합 시트",
       desc: "2026년 주간 계획 및 수행 현황 통합 시트",
       type: "sheet",
       typeLabel: "Spreadsheet",
@@ -583,7 +588,29 @@
       typeLabel: "Drive Folder",
       url: "https://drive.google.com/drive/u/0/folders/1HGsEbd5GCIshTwkpk5a3UKtgpWDLwwcH",
       shortUrl: "drive.google.com/drive/folders"
-    }
+    },
+    {
+      id: 10,
+      category: "receipt",
+      categoryLabel: "영수증/청구서",
+      title: "AI 구독 서비스",
+      desc: "AI 구독 서비스 영수증/청구서 제출",
+      type: "folder",
+      typeLabel: "Drive Folder",
+      url: "https://drive.google.com/drive/u/0/folders/1zh0-skrFSE0moBmoTGCDV8VtP9bkUpfY",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 11,
+      category: "receipt",
+      categoryLabel: "영수증/청구서 제출",
+      title: "거래명세서",
+      desc: "거래명세서 업로드",
+      type: "folder",
+      typeLabel: "Drive Folder",
+      url: "https://drive.google.com/drive/folders/1a5hJcfi0vPrfA_bSdytT3sDZvJZ-QoNH",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
   ];
 
   let currentTab = "all";
