@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="ko" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lab Navigator</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Pretendard:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root[data-theme="dark"] {
+    --bg: #0e0e0e;
+    --bg2: #161616;
+    --bg3: #1f1f1f;
+    --border: #2a2a2a;
+    --text: #f0f0f0;
+    --text2: #888;
+    --text3: #555;
+    --accent: #c8f542;
+    --accent2: #3b82f6;
+    --card: #161616;
+    --card-hover: #1f1f1f;
+    --badge: #1a1a1a;
+    --shadow: 0 4px 24px rgba(0,0,0,0.5);
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f0e8;
+    --bg2: #ede8df;
+    --bg3: #e4ddd3;
+    --border: #d4cdc4;
+    --text: #1a1a1a;
+    --text2: #666;
+    --text3: #aaa;
+    --accent: #2d6a00;
+    --accent2: #1e40af;
+    --card: #faf7f2;
+    --card-hover: #f0ece4;
+    --badge: #e8e2d8;
+    --shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', sans-serif;
+    min-height: 100vh;
+    transition: background 0.3s, color 0.3s;
+  }
+
+  /* HEADER */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+  }
+
+  .logo span {
+    color: var(--text2);
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 4px;
+    cursor: pointer;
+  }
+
+  .theme-btn {
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: transparent;
+    color: var(--text3);
+  }
+
+  .theme-btn.active {
+    background: var(--accent);
+    color: #000;
+  }
+
+  /* SEARCH */
+  .search-wrap {
+    position: relative;
+  }
+
+  .search-wrap svg {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+  }
+
+  #searchInput {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 7px 14px 7px 36px;
+    font-size: 13px;
+    color: var(--text);
+    width: 200px;
+    outline: none;
+    font-family: 'Pretendard', sans-serif;
+    transition: border-color 0.2s, width 0.3s;
+  }
+
+  #searchInput:focus {
+    border-color: var(--accent);
+    width: 240px;
+  }
+
+  #searchInput::placeholder { color: var(--text3); }
+
+  /* MAIN */
+  main {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* HERO */
+  .hero {
+    margin-bottom: 48px;
+  }
+
+  .hero-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    color: var(--text3);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+
+  .hero p {
+    font-size: 14px;
+    color: var(--text2);
+    font-weight: 400;
+  }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 4px;
+    margin-bottom: 32px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 7px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'Pretendard', sans-serif;
+    transition: all 0.15s;
+  }
+
+  .tab:hover { color: var(--text); border-color: var(--text3); }
+
+  .tab.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000;
+    font-weight: 600;
+  }
+
+  /* COUNT BADGE */
+  .tab-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    margin-left: 5px;
+    opacity: 0.6;
+  }
+
+  /* SECTION */
+  .section {
+    margin-bottom: 48px;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text3);
+    font-family: 'DM Mono', monospace;
+  }
+
+  .section-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* GRID */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 12px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .card:hover {
+    background: var(--card-hover);
+    border-color: var(--text3);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+  }
+
+  .card:hover::before { opacity: 1; }
+
+  .card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+
+  .card-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--badge);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: 0;
+  }
+
+  .card-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--badge);
+    border: 1px solid var(--border);
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  .card-badge.sheet { color: #22c55e; border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.06); }
+  .card-badge.folder { color: #f59e0b; border-color: rgba(245,158,11,0.2); background: rgba(245,158,11,0.06); }
+
+  .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 5px;
+    letter-spacing: -0.01em;
+  }
+
+  .card-desc {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.6;
+  }
+
+  .card-footer {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-url {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+  }
+
+  .card-arrow {
+    color: var(--text3);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .card:hover .card-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  /* EMPTY */
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text3);
+    font-size: 13px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* STATS BAR */
+  .stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--accent);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 0 16px; }
+    main { padding: 32px 16px 60px; }
+    .stats { gap: 16px; flex-wrap: wrap; }
+    .grid { grid-template-columns: 1fr; }
+    #searchInput { width: 140px; }
+    #searchInput:focus { width: 160px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">LAB<span>/</span>NAV</div>
+  <div class="header-right">
+    <div class="search-wrap">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="시트 검색..." oninput="filterCards(this.value)"/>
+    </div>
+    <div class="theme-toggle">
+      <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">DARK</button>
+      <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">LIGHT</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-label">Research Data Hub</div>
+    <h1><em>METEOR</em> R&D 연구 <em>트래킹</em><br/>대시보드</h1>
+    <p>여기저기 흩어진 연구의 구슬 조각을 모으는 중...</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-num" id="totalCount">8</div>
+      <div class="stat-label">전체 시트</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">4</div>
+      <div class="stat-label">카테고리</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">스프레드시트</div>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-num">2</div>
+      <div class="stat-label">드라이브 폴더</div>
+    </div>
+  </div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" onclick="filterTab('all', this)">전체 <span class="tab-count">8</span></button>
+    <button class="tab" onclick="filterTab('plan', this)">계획/관리 <span class="tab-count">2</span></button>
+    <button class="tab" onclick="filterTab('experiment', this)">실험 트래킹 <span class="tab-count">2</span></button>
+    <button class="tab" onclick="filterTab('reagent', this)">시약/소모품/슬라이드 <span class="tab-count">2</span></button>
+    <button class="tab" onclick="filterTab('docs', this)">연구 문서 <span class="tab-count">2</span></button>
+  </div>
+
+  <div id="cardContainer"></div>
+
+  <div class="empty" id="emptyMsg" style="display:none;">검색 결과가 없습니다.</div>
+</main>
+
+<script>
+  const DATA = [
+    {
+      id: 1,
+      category: "plan",
+      categoryLabel: "계획/관리",
+      title: "연간 연구 계획표",
+      desc: "2026년 주간 계획 및 수행 현황 통합 시트",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1h4x2pJFAJqJxjAw2k26oIGKNNryNybLfXsc0w_Bnq0E/edit?gid=556864349#gid=556864349",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 2,
+      category: "experiment",
+      categoryLabel: "시퀀싱 트래킹",
+      title: "시퀀싱 현황 관리 시트",
+      desc: "시퀀싱 현황 관리 트래킹",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1LCzAZ9FpE8k8l2bYCkn9ZvZUqFmKR19RPNw4D30BS0Y/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+       {
+      id: 3,
+      category: "experiment",
+      categoryLabel: "안티바디 트래킹",
+      title: "안티바디 재고 관리 시트",
+      desc: "안티바디 재고 관리 트래킹",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1LCzAZ9FpE8k8l2bYCkn9ZvZUqFmKR19RPNw4D30BS0Y/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 4,
+      category: "experiment",
+      categoryLabel: "이한별 교수님 TNBC 샘플 트래킹",
+      title: "이한별 교수님 TNBC 샘플 관리 시트",
+      desc: "이한별 교수님 TNBC 샘플 관리 트래킹",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1LCzAZ9FpE8k8l2bYCkn9ZvZUqFmKR19RPNw4D30BS0Y/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 5,
+      category: "reagent",
+      categoryLabel: "시약/소모품",
+      title: "각종 거래처 ID/PW",
+      desc: "각종 거래처 ID/PW 트래킹",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1VXzSnPrHbRUdxSkvGVr1beimXHxsfrEtEfzhpnFKxoA/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 6,
+      category: "reagent",
+      categoryLabel: "코스모 슬라이드",
+      title: "슬라이드 재고 관리",
+      desc: "슬라이드 코팅 종류, 반출 관리 현황",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1VFhI6zejR84aRLBre3fPKjMGbXTJRl-er7GLiDmRe2U/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 7,
+      category: "reagent",
+      categoryLabel: "시약/소모품",
+      title: "시약/소모품 발주 내역",
+      desc: "시약/소모품 발주 내역 트래킹",
+      type: "sheet",
+      typeLabel: "Spreadsheet",
+      url: "https://docs.google.com/spreadsheets/d/1F0eMCdEOxIOiZYahYqCME-FvPmfCQAdglZI3Sm6hfEI/edit?gid=1911127372#gid=1911127372",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 8,
+      category: "docs",
+      categoryLabel: "연구 문서",
+      title: "R&D 연구노트",
+      desc: "연구노트 원본 파일 드라이브 폴더",
+      type: "folder",
+      typeLabel: "Drive Folder",
+      url: "https://drive.google.com/drive/u/0/folders/1CACiWAM3YuZYluRb5vZrmNCbYZwszCME",
+      shortUrl: "drive.google.com/drive/folders"
+    },
+    {
+      id: 9,
+      category: "docs",
+      categoryLabel: "연구 문서",
+      title: "프로젝트 관리",
+      desc: "프로젝트 관리 파일 드라이브 폴더",
+      type: "folder",
+      typeLabel: "Drive Folder",
+      url: "https://drive.google.com/drive/u/0/folders/1HGsEbd5GCIshTwkpk5a3UKtgpWDLwwcH",
+      shortUrl: "drive.google.com/drive/folders"
+    }
+  ];
+
+  let currentTab = "all";
+  let currentSearch = "";
+
+  function getIconLabel(type) {
+    if (type === "sheet") return "GS";
+    if (type === "folder") return "GD";
+    return "??";
+  }
+
+  function renderCards() {
+    const container = document.getElementById("cardContainer");
+    const empty = document.getElementById("emptyMsg");
+
+    let filtered = DATA;
+
+    if (currentTab !== "all") {
+      filtered = filtered.filter(d => d.category === currentTab);
+    }
+
+    if (currentSearch.trim()) {
+      const q = currentSearch.trim().toLowerCase();
+      filtered = filtered.filter(d =>
+        d.title.toLowerCase().includes(q) ||
+        d.desc.toLowerCase().includes(q) ||
+        d.categoryLabel.toLowerCase().includes(q)
+      );
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = "";
+      empty.style.display = "block";
+      return;
+    }
+
+    empty.style.display = "none";
+
+    // group by category
+    const groups = {};
+    filtered.forEach(d => {
+      if (!groups[d.category]) {
+        groups[d.category] = { label: d.categoryLabel, items: [] };
+      }
+      groups[d.category].items.push(d);
+    });
+
+    let html = "";
+
+    Object.values(groups).forEach(group => {
+      html += `
+        <div class="section">
+          <div class="section-header">
+            <div class="section-title">${group.label}</div>
+            <div class="section-line"></div>
+          </div>
+          <div class="grid">
+      `;
+
+      group.items.forEach(d => {
+        html += `
+          <a class="card" href="${d.url}" target="_blank" rel="noopener noreferrer">
+            <div class="card-top">
+              <div class="card-icon">${getIconLabel(d.type)}</div>
+              <div class="card-badge ${d.type}">${d.typeLabel}</div>
+            </div>
+            <div class="card-title">${d.title}</div>
+            <div class="card-desc">${d.desc}</div>
+            <div class="card-footer">
+              <div class="card-url">${d.shortUrl}</div>
+              <svg class="card-arrow" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </div>
+          </a>
+        `;
+      });
+
+      html += `</div></div>`;
+    });
+
+    container.innerHTML = html;
+  }
+
+  function filterTab(tab, el) {
+    currentTab = tab;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+    renderCards();
+  }
+
+  function filterCards(val) {
+    currentSearch = val;
+    renderCards();
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+    document.getElementById("btn-dark").classList.toggle("active", theme === "dark");
+    document.getElementById("btn-light").classList.toggle("active", theme === "light");
+    localStorage.setItem("lab-theme", theme);
+  }
+
+  // init
+  const savedTheme = localStorage.getItem("lab-theme") || "dark";
+  setTheme(savedTheme);
+  renderCards();
+</script>
+</body>
+</html>
