@@ -47,7 +47,6 @@
     transition: background 0.3s, color 0.3s;
   }
 
-  /* HEADER */
   header {
     position: sticky;
     top: 0;
@@ -68,10 +67,7 @@
     letter-spacing: 0.08em;
     color: var(--accent);
   }
-
-  .logo span {
-    color: var(--text2);
-  }
+  .logo span { color: var(--text2); }
 
   .header-right {
     display: flex;
@@ -79,7 +75,6 @@
     gap: 16px;
   }
 
-  /* THEME TOGGLE */
   .theme-toggle {
     display: flex;
     align-items: center;
@@ -104,17 +99,9 @@
     background: transparent;
     color: var(--text3);
   }
+  .theme-btn.active { background: var(--accent); color: #000; }
 
-  .theme-btn.active {
-    background: var(--accent);
-    color: #000;
-  }
-
-  /* SEARCH */
-  .search-wrap {
-    position: relative;
-  }
-
+  .search-wrap { position: relative; }
   .search-wrap svg {
     position: absolute;
     left: 12px;
@@ -135,26 +122,16 @@
     font-family: 'Pretendard', sans-serif;
     transition: border-color 0.2s, width 0.3s;
   }
-
-  #searchInput:focus {
-    border-color: var(--accent);
-    width: 240px;
-  }
-
+  #searchInput:focus { border-color: var(--accent); width: 240px; }
   #searchInput::placeholder { color: var(--text3); }
 
-  /* MAIN */
   main {
     max-width: 1100px;
     margin: 0 auto;
     padding: 48px 32px 80px;
   }
 
-  /* HERO */
-  .hero {
-    margin-bottom: 48px;
-  }
-
+  .hero { margin-bottom: 48px; }
   .hero-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
@@ -163,7 +140,6 @@
     text-transform: uppercase;
     margin-bottom: 10px;
   }
-
   .hero h1 {
     font-size: clamp(28px, 4vw, 42px);
     font-weight: 700;
@@ -171,26 +147,36 @@
     letter-spacing: -0.02em;
     margin-bottom: 10px;
   }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero p { font-size: 14px; color: var(--text2); }
 
-  .hero h1 em {
-    font-style: normal;
+  /* STATS */
+  .stats {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+    padding: 16px 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+  .stat { display: flex; flex-direction: column; gap: 2px; }
+  .stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
     color: var(--accent);
   }
-
-  .hero p {
-    font-size: 14px;
-    color: var(--text2);
-    font-weight: 400;
-  }
+  .stat-label { font-size: 11px; color: var(--text3); letter-spacing: 0.05em; }
+  .stat-divider { width: 1px; background: var(--border); align-self: stretch; }
 
   /* TABS */
   .tabs {
     display: flex;
     gap: 4px;
-    margin-bottom: 32px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
   }
-
   .tab {
     padding: 7px 18px;
     border-radius: 6px;
@@ -203,36 +189,79 @@
     font-family: 'Pretendard', sans-serif;
     transition: all 0.15s;
   }
-
   .tab:hover { color: var(--text); border-color: var(--text3); }
+  .tab.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 600; }
+  .tab-count { font-family: 'DM Mono', monospace; font-size: 10px; margin-left: 5px; opacity: 0.6; }
 
-  .tab.active {
-    background: var(--accent);
-    border-color: var(--accent);
-    color: #000;
-    font-weight: 600;
+  /* SUB FILTERS */
+  .sub-filters {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+    align-items: center;
   }
 
-  /* COUNT BADGE */
-  .tab-count {
+  .sub-filter-group {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+  }
+
+  .sub-label {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
-    margin-left: 5px;
-    opacity: 0.6;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-right: 4px;
+  }
+
+  .sub-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border);
+    margin: 0 8px;
+  }
+
+  .sub-btn {
+    padding: 5px 14px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text2);
+    font-family: 'DM Mono', monospace;
+    letter-spacing: 0.05em;
+    transition: all 0.15s;
+  }
+  .sub-btn:hover { color: var(--text); border-color: var(--text3); }
+  .sub-btn.active-status {
+    background: rgba(34, 197, 94, 0.1);
+    border-color: rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+  }
+  .sub-btn.deprecated-status {
+    background: rgba(100, 100, 100, 0.1);
+    border-color: rgba(100, 100, 100, 0.3);
+    color: var(--text3);
+  }
+  .sub-btn.year-btn.active-year {
+    background: rgba(200, 245, 66, 0.1);
+    border-color: rgba(200, 245, 66, 0.3);
+    color: var(--accent);
   }
 
   /* SECTION */
-  .section {
-    margin-bottom: 48px;
-  }
-
+  .section { margin-bottom: 48px; }
   .section-header {
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 16px;
   }
-
   .section-title {
     font-size: 11px;
     font-weight: 600;
@@ -240,12 +269,14 @@
     text-transform: uppercase;
     color: var(--text3);
     font-family: 'DM Mono', monospace;
+    white-space: nowrap;
   }
-
-  .section-line {
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+  .section-count {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text3);
+    white-space: nowrap;
   }
 
   /* GRID */
@@ -268,6 +299,10 @@
     overflow: hidden;
   }
 
+  .card.is-deprecated {
+    opacity: 0.5;
+  }
+
   .card::before {
     content: '';
     position: absolute;
@@ -279,51 +314,80 @@
     transition: opacity 0.2s;
   }
 
+  .card.is-deprecated::before {
+    background: var(--text3);
+  }
+
   .card:hover {
     background: var(--card-hover);
     border-color: var(--text3);
     transform: translateY(-2px);
     box-shadow: var(--shadow);
   }
-
   .card:hover::before { opacity: 1; }
+  .card.is-deprecated:hover { opacity: 0.7; }
 
+  /* CARD TOP: left type chip + right status */
   .card-top {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
   }
 
-  .card-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 8px;
-    background: var(--badge);
-    border: 1px solid var(--border);
+  /* 왼쪽: 아이콘 + 타입명 */
+  .card-type {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .card-type-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
+  }
+  .card-type-icon.sheet {
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+  }
+  .card-type-icon.folder {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.2);
+  }
+
+  .card-type-label {
     font-family: 'DM Mono', monospace;
     font-size: 11px;
     font-weight: 500;
-    color: var(--accent);
-    letter-spacing: 0;
+    letter-spacing: 0.03em;
   }
+  .card-type-label.sheet { color: #22c55e; }
+  .card-type-label.folder { color: #f59e0b; }
 
-  .card-badge {
+  /* 오른쪽: status pill */
+  .status-pill {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
     padding: 3px 8px;
-    border-radius: 4px;
-    background: var(--badge);
-    border: 1px solid var(--border);
-    color: var(--text3);
-    letter-spacing: 0.05em;
+    border-radius: 99px;
+    letter-spacing: 0.06em;
+    font-weight: 500;
   }
-
-  .card-badge.sheet { color: #22c55e; border-color: rgba(34,197,94,0.2); background: rgba(34,197,94,0.06); }
-  .card-badge.folder { color: #f59e0b; border-color: rgba(245,158,11,0.2); background: rgba(245,158,11,0.06); }
+  .status-pill.active {
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+    color: #22c55e;
+  }
+  .status-pill.deprecated {
+    background: rgba(100, 100, 100, 0.08);
+    border: 1px solid rgba(100, 100, 100, 0.2);
+    color: var(--text3);
+  }
 
   .card-title {
     font-size: 15px;
@@ -331,6 +395,10 @@
     color: var(--text);
     margin-bottom: 5px;
     letter-spacing: -0.01em;
+  }
+  .card.is-deprecated .card-title {
+    text-decoration: line-through;
+    text-decoration-color: var(--text3);
   }
 
   .card-desc {
@@ -347,7 +415,6 @@
     align-items: center;
     justify-content: space-between;
   }
-
   .card-url {
     font-family: 'DM Mono', monospace;
     font-size: 10px;
@@ -355,18 +422,14 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: 200px;
+    max-width: 220px;
   }
-
   .card-arrow {
     color: var(--text3);
     transition: color 0.2s, transform 0.2s;
+    flex-shrink: 0;
   }
-
-  .card:hover .card-arrow {
-    color: var(--accent);
-    transform: translateX(3px);
-  }
+  .card:hover .card-arrow { color: var(--accent); transform: translateX(3px); }
 
   /* EMPTY */
   .empty {
@@ -377,45 +440,8 @@
     font-family: 'DM Mono', monospace;
   }
 
-  /* STATS BAR */
-  .stats {
-    display: flex;
-    gap: 24px;
-    margin-bottom: 32px;
-    padding: 16px 20px;
-    background: var(--bg3);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .stat-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--accent);
-  }
-
-  .stat-label {
-    font-size: 11px;
-    color: var(--text3);
-    letter-spacing: 0.05em;
-  }
-
-  .stat-divider {
-    width: 1px;
-    background: var(--border);
-    align-self: stretch;
-  }
-
-  :root[data-theme="light"] .tab.active {
-    color: #ffffff;
-  }
+  :root[data-theme="light"] .tab.active { color: #fff; }
+  :root[data-theme="light"] .sub-btn.year-btn.active-year { color: var(--accent); }
 
   @media (max-width: 600px) {
     header { padding: 0 16px; }
@@ -439,7 +465,7 @@
       <input type="text" id="searchInput" placeholder="시트 검색..." oninput="filterCards(this.value)"/>
     </div>
     <div class="theme-toggle">
-      <button class="theme-btn active" id="btn-light" onclick="setTheme('light')">LIGHT</button>
+      <button class="theme-btn" id="btn-light" onclick="setTheme('light')">LIGHT</button>
       <button class="theme-btn" id="btn-dark" onclick="setTheme('dark')">DARK</button>
     </div>
   </div>
@@ -454,37 +480,54 @@
 
   <div class="stats">
     <div class="stat">
-      <div class="stat-num" id="totalCount">11</div>
+      <div class="stat-num" id="statTotal">-</div>
       <div class="stat-label">전체</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">5</div>
+      <div class="stat-num" id="statCat">5</div>
       <div class="stat-label">카테고리</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">7</div>
-      <div class="stat-label">스프레드시트</div>
+      <div class="stat-num" id="statActive">-</div>
+      <div class="stat-label">사용 중</div>
     </div>
     <div class="stat-divider"></div>
     <div class="stat">
-      <div class="stat-num">4</div>
-      <div class="stat-label">드라이브 폴더</div>
+      <div class="stat-num" id="statDeprecated">-</div>
+      <div class="stat-label">미사용</div>
     </div>
   </div>
 
   <div class="tabs" id="tabs">
-    <button class="tab active" onclick="filterTab('all', this)">전체 <span class="tab-count">11</span></button>
-    <button class="tab" onclick="filterTab('plan', this)">계획/관리 <span class="tab-count">1</span></button>
-    <button class="tab" onclick="filterTab('experiment', this)">실험 트래킹 <span class="tab-count">2</span></button>
-    <button class="tab" onclick="filterTab('reagent', this)">시약/소모품 <span class="tab-count">4</span></button>
-    <button class="tab" onclick="filterTab('docs', this)">연구 문서 <span class="tab-count">2</span></button>
-    <button class="tab" onclick="filterTab('receipt', this)">결제 관리 <span class="tab-count">2</span></button>
+    <button class="tab active" onclick="filterTab('all', this)">전체 <span class="tab-count" id="cnt-all"></span></button>
+    <button class="tab" onclick="filterTab('plan', this)">계획/관리 <span class="tab-count" id="cnt-plan"></span></button>
+    <button class="tab" onclick="filterTab('experiment', this)">실험 트래킹 <span class="tab-count" id="cnt-experiment"></span></button>
+    <button class="tab" onclick="filterTab('reagent', this)">시약/소모품 <span class="tab-count" id="cnt-reagent"></span></button>
+    <button class="tab" onclick="filterTab('docs', this)">연구 문서 <span class="tab-count" id="cnt-docs"></span></button>
+    <button class="tab" onclick="filterTab('receipt', this)">결제 관리 <span class="tab-count" id="cnt-receipt"></span></button>
+  </div>
+
+  <!-- SUB FILTERS -->
+  <div class="sub-filters" id="subFilters">
+    <!-- STATUS 필터 -->
+    <div class="sub-filter-group">
+      <span class="sub-label">STATUS</span>
+      <button class="sub-btn active-status" id="btn-active" onclick="filterStatus('active')">ACTIVE</button>
+      <button class="sub-btn" id="btn-deprecated" onclick="filterStatus('deprecated')">DEPRECATED</button>
+    </div>
+
+    <!-- YEAR 필터 (계획/관리 탭일 때만 표시) -->
+    <div class="sub-divider" id="yearDivider" style="display:none;"></div>
+    <div class="sub-filter-group" id="yearGroup" style="display:none;">
+      <span class="sub-label">YEAR</span>
+      <button class="sub-btn year-btn" id="btn-2025" onclick="filterYear(2025)">2025</button>
+      <button class="sub-btn year-btn" id="btn-2026" onclick="filterYear(2026)">2026</button>
+    </div>
   </div>
 
   <div id="cardContainer"></div>
-
   <div class="empty" id="emptyMsg" style="display:none;">검색 결과가 없습니다.</div>
 </main>
 
@@ -497,8 +540,23 @@
       title: "2026년 주간 계획 및 수행 현황 통합 시트",
       desc: "2026년 주간 계획 및 수행 현황 통합 시트",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: 2026,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1h4x2pJFAJqJxjAw2k26oIGKNNryNybLfXsc0w_Bnq0E/edit?gid=556864349#gid=556864349",
+      shortUrl: "docs.google.com/spreadsheets"
+    },
+    {
+      id: 12,
+      category: "plan",
+      categoryLabel: "계획/관리",
+      title: "2025년 주간 계획 및 수행 현황 통합 시트",
+      desc: "2025년 주간 계획 및 수행 현황 통합 시트 (구버전)",
+      type: "sheet",
+      typeLabel: "Google Spreadsheet",
+      year: 2025,
+      status: "deprecated",
+      url: "https://docs.google.com/spreadsheets/d/1h4x2pJFAJqJxjAw2k26oIGKNNryNybLfXsc0w_Bnq0E/edit",
       shortUrl: "docs.google.com/spreadsheets"
     },
     {
@@ -508,18 +566,22 @@
       title: "시퀀싱 현황 관리 시트",
       desc: "시퀀싱 현황 관리 트래킹",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1LCzAZ9FpE8k8l2bYCkn9ZvZUqFmKR19RPNw4D30BS0Y/edit?gid=0#gid=0",
       shortUrl: "docs.google.com/spreadsheets"
     },
     {
       id: 3,
       category: "experiment",
-      categoryLabel: "이한별 교수님 TNBC 샘플 트래킹",
+      categoryLabel: "실험 트래킹",
       title: "이한별 교수님 TNBC 샘플 관리 시트",
       desc: "이한별 교수님 TNBC 샘플 관리 트래킹",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1kvPS5IyH7ICy3ossTaQDeAcjgHo19vll/edit?gid=1544194724#gid=1544194724",
       shortUrl: "docs.google.com/spreadsheets"
     },
@@ -530,7 +592,9 @@
       title: "각종 거래처 ID/PW",
       desc: "각종 거래처 ID/PW 트래킹",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1VXzSnPrHbRUdxSkvGVr1beimXHxsfrEtEfzhpnFKxoA/edit?gid=0#gid=0",
       shortUrl: "docs.google.com/spreadsheets"
     },
@@ -541,28 +605,35 @@
       title: "시약/소모품 발주 내역",
       desc: "시약/소모품 발주 내역 트래킹",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1F0eMCdEOxIOiZYahYqCME-FvPmfCQAdglZI3Sm6hfEI/edit?gid=1911127372#gid=1911127372",
       shortUrl: "docs.google.com/spreadsheets"
     },
     {
       id: 6,
       category: "reagent",
-      categoryLabel: "안티바디 트래킹",
+      categoryLabel: "시약/소모품",
       title: "안티바디 재고 관리",
       desc: "안티바디 재고 관리 트래킹",
       type: "sheet",
-      typeLabel: "Spreadsheet",
-      url: "https://docs.google.com/spreadsheets/d/1WUDc_CjtcPVFSBluIVxr8fuGCtjHa5Jcka5Gqrw4H64/edit?gid=0#gid=0"
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
+      url: "https://docs.google.com/spreadsheets/d/1WUDc_CjtcPVFSBluIVxr8fuGCtjHa5Jcka5Gqrw4H64/edit?gid=0#gid=0",
+      shortUrl: "docs.google.com/spreadsheets"
     },
     {
       id: 7,
       category: "reagent",
-      categoryLabel: "코스모 슬라이드",
+      categoryLabel: "시약/소모품",
       title: "슬라이드 재고 관리",
       desc: "슬라이드 코팅 종류, 반출 관리 현황",
       type: "sheet",
-      typeLabel: "Spreadsheet",
+      typeLabel: "Google Spreadsheet",
+      year: null,
+      status: "active",
       url: "https://docs.google.com/spreadsheets/d/1VFhI6zejR84aRLBre3fPKjMGbXTJRl-er7GLiDmRe2U/edit?gid=0#gid=0",
       shortUrl: "docs.google.com/spreadsheets"
     },
@@ -573,7 +644,9 @@
       title: "R&D 연구노트",
       desc: "연구노트 원본 파일 드라이브 폴더",
       type: "folder",
-      typeLabel: "Drive Folder",
+      typeLabel: "Google Drive",
+      year: null,
+      status: "active",
       url: "https://drive.google.com/drive/u/0/folders/1CACiWAM3YuZYluRb5vZrmNCbYZwszCME",
       shortUrl: "drive.google.com/drive/folders"
     },
@@ -584,51 +657,133 @@
       title: "프로젝트 관리",
       desc: "프로젝트 관리 파일 드라이브 폴더",
       type: "folder",
-      typeLabel: "Drive Folder",
+      typeLabel: "Google Drive",
+      year: null,
+      status: "active",
       url: "https://drive.google.com/drive/u/0/folders/1HGsEbd5GCIshTwkpk5a3UKtgpWDLwwcH",
       shortUrl: "drive.google.com/drive/folders"
     },
     {
       id: 10,
       category: "receipt",
-      categoryLabel: "영수증/청구서",
+      categoryLabel: "결제 관리",
       title: "AI 구독 서비스",
       desc: "AI 구독 서비스 영수증/청구서 제출",
       type: "folder",
-      typeLabel: "Drive Folder",
+      typeLabel: "Google Drive",
+      year: null,
+      status: "active",
       url: "https://drive.google.com/drive/u/0/folders/1zh0-skrFSE0moBmoTGCDV8VtP9bkUpfY",
-      shortUrl: "docs.google.com/spreadsheets"
+      shortUrl: "drive.google.com/drive/folders"
     },
     {
       id: 11,
       category: "receipt",
-      categoryLabel: "영수증/청구서 제출",
+      categoryLabel: "결제 관리",
       title: "거래명세서",
       desc: "거래명세서 업로드",
       type: "folder",
-      typeLabel: "Drive Folder",
+      typeLabel: "Google Drive",
+      year: null,
+      status: "active",
       url: "https://drive.google.com/drive/folders/1a5hJcfi0vPrfA_bSdytT3sDZvJZ-QoNH",
-      shortUrl: "docs.google.com/spreadsheets"
-    },
+      shortUrl: "drive.google.com/drive/folders"
+    }
   ];
 
-  let currentTab = "all";
+  let currentTab    = "all";
+  let currentStatus = "active";   // "active" | "deprecated"
+  let currentYear   = null;       // null | 2025 | 2026
   let currentSearch = "";
 
-  function getIconLabel(type) {
-    if (type === "sheet") return "GS";
-    if (type === "folder") return "GD";
-    return "??";
+  /* ── SVG 아이콘 ── */
+  function getTypeIcon(type) {
+    if (type === "sheet") {
+      return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/>
+      </svg>`;
+    }
+    return `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/>
+    </svg>`;
   }
 
+  /* ── 탭별 카운트 업데이트 ── */
+  function updateTabCounts() {
+    const categories = ["all", "plan", "experiment", "reagent", "docs", "receipt"];
+    categories.forEach(cat => {
+      const el = document.getElementById("cnt-" + cat);
+      if (!el) return;
+      const count = cat === "all"
+        ? DATA.length
+        : DATA.filter(d => d.category === cat).length;
+      el.textContent = count;
+    });
+
+    const activeCount     = DATA.filter(d => d.status === "active").length;
+    const deprecatedCount = DATA.filter(d => d.status === "deprecated").length;
+    document.getElementById("statTotal").textContent      = DATA.length;
+    document.getElementById("statActive").textContent     = activeCount;
+    document.getElementById("statDeprecated").textContent = deprecatedCount;
+  }
+
+  /* ── STATUS 필터 ── */
+  function filterStatus(status) {
+    currentStatus = status;
+    document.getElementById("btn-active").className      = "sub-btn" + (status === "active"      ? " active-status"     : "");
+    document.getElementById("btn-deprecated").className  = "sub-btn" + (status === "deprecated"  ? " deprecated-status" : "");
+    renderCards();
+  }
+
+  /* ── YEAR 필터 ── */
+  function filterYear(year) {
+    if (currentYear === year) {
+      currentYear = null;
+    } else {
+      currentYear = year;
+    }
+    document.getElementById("btn-2025").className = "sub-btn year-btn" + (currentYear === 2025 ? " active-year" : "");
+    document.getElementById("btn-2026").className = "sub-btn year-btn" + (currentYear === 2026 ? " active-year" : "");
+    renderCards();
+  }
+
+  /* ── TAB 필터 ── */
+  function filterTab(tab, el) {
+    currentTab  = tab;
+    currentYear = null;
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    el.classList.add("active");
+
+    const showYear = tab === "plan";
+    document.getElementById("yearGroup").style.display  = showYear ? "flex" : "none";
+    document.getElementById("yearDivider").style.display = showYear ? "block" : "none";
+    document.getElementById("btn-2025").className = "sub-btn year-btn";
+    document.getElementById("btn-2026").className = "sub-btn year-btn";
+
+    renderCards();
+  }
+
+  /* ── 검색 ── */
+  function filterCards(val) {
+    currentSearch = val;
+    renderCards();
+  }
+
+  /* ── 카드 렌더링 ── */
   function renderCards() {
     const container = document.getElementById("cardContainer");
-    const empty = document.getElementById("emptyMsg");
+    const empty     = document.getElementById("emptyMsg");
 
     let filtered = DATA;
 
     if (currentTab !== "all") {
       filtered = filtered.filter(d => d.category === currentTab);
+    }
+
+    filtered = filtered.filter(d => d.status === currentStatus);
+
+    if (currentTab === "plan" && currentYear !== null) {
+      filtered = filtered.filter(d => d.year === currentYear);
     }
 
     if (currentSearch.trim()) {
@@ -648,7 +803,7 @@
 
     empty.style.display = "none";
 
-    // group by category
+    /* 카테고리별 그룹핑 */
     const groups = {};
     filtered.forEach(d => {
       if (!groups[d.category]) {
@@ -658,23 +813,36 @@
     });
 
     let html = "";
-
     Object.values(groups).forEach(group => {
       html += `
         <div class="section">
           <div class="section-header">
             <div class="section-title">${group.label}</div>
             <div class="section-line"></div>
+            <div class="section-count">${group.items.length}</div>
           </div>
           <div class="grid">
       `;
 
       group.items.forEach(d => {
+        const deprecatedClass = d.status === "deprecated" ? " is-deprecated" : "";
+        const statusPill = d.status === "deprecated"
+          ? `<span class="status-pill deprecated">DEPRECATED</span>`
+          : `<span class="status-pill active">ACTIVE</span>`;
+
+        const yearTag = (d.category === "plan" && d.year)
+          ? `<span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--text3);margin-left:6px;letter-spacing:0.05em;">${d.year}</span>`
+          : "";
+
         html += `
-          <a class="card" href="${d.url}" target="_blank" rel="noopener noreferrer">
+          <a class="card${deprecatedClass}" href="${d.url}" target="_blank" rel="noopener noreferrer">
             <div class="card-top">
-              <div class="card-icon">${getIconLabel(d.type)}</div>
-              <div class="card-badge ${d.type}">${d.typeLabel}</div>
+              <div class="card-type">
+                <div class="card-type-icon ${d.type}">${getTypeIcon(d.type)}</div>
+                <span class="card-type-label ${d.type}">${d.typeLabel}</span>
+                ${yearTag}
+              </div>
+              ${statusPill}
             </div>
             <div class="card-title">${d.title}</div>
             <div class="card-desc">${d.desc}</div>
@@ -694,28 +862,18 @@
     container.innerHTML = html;
   }
 
-  function filterTab(tab, el) {
-    currentTab = tab;
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    el.classList.add("active");
-    renderCards();
-  }
-
-  function filterCards(val) {
-    currentSearch = val;
-    renderCards();
-  }
-
+  /* ── 테마 ── */
   function setTheme(theme) {
     document.documentElement.setAttribute("data-theme", theme);
-    document.getElementById("btn-dark").classList.toggle("active", theme === "dark");
+    document.getElementById("btn-dark").classList.toggle("active",  theme === "dark");
     document.getElementById("btn-light").classList.toggle("active", theme === "light");
     localStorage.setItem("lab-theme", theme);
   }
 
-  // init
+  /* ── 초기화 ── */
   const savedTheme = localStorage.getItem("lab-theme") || "dark";
   setTheme(savedTheme);
+  updateTabCounts();
   renderCards();
 </script>
 </body>
